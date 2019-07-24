@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.MainActivity">
+    <Button
+            android:id="@+id/but_init_arouter"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="初始化ARouter"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/but_destroy_arouter"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_destroy_arouter"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="关闭ARouter"
+            app:layout_constraintTop_toTopOf="@id/but_init_arouter"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/but_init_arouter"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="同模块跳转（无参）"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/but_init_arouter"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/but_arouter_normal_navigation_with_params"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_with_params"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="同模块跳转（传参）"
+            app:layout_constraintTop_toTopOf="@id/but_arouter_normal_navigation"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/but_arouter_normal_navigation"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_with_params_url"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="URL跳转（传值）"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/but_arouter_normal_navigation"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/but_arouter_normal_navigation_with_params_fragment"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_with_params_fragment"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Fragment跳转"
+            app:layout_constraintTop_toTopOf="@id/but_arouter_normal_navigation_with_params_url"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/but_arouter_normal_navigation_with_params_url"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_oldVersionAnim"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="老版本跳转动画"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/but_arouter_normal_navigation_with_params_url"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/but_arouter_normal_navigation_newVersionAnim"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_newVersionAnim"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="新版本跳转动画"
+            app:layout_constraintTop_toTopOf="@id/but_arouter_normal_navigation_oldVersionAnim"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/but_arouter_normal_navigation_oldVersionAnim"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_interceptor"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="拦截器测试"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/but_arouter_normal_navigation_oldVersionAnim"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/but_arouter_normal_navigation_autoInject"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_autoInject"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="跳转ForResult"
+            app:layout_constraintTop_toTopOf="@id/but_arouter_normal_navigation_interceptor"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/but_arouter_normal_navigation_interceptor"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_by_name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="ByName调用服务"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/but_arouter_normal_navigation_interceptor"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/but_arouter_normal_navigation_by_type"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_by_type"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="ByType调用服务"
+            app:layout_constraintTop_toTopOf="@id/but_arouter_normal_navigation_by_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/but_arouter_normal_navigation_by_name"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_call_single"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="调用单类服务"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/but_arouter_normal_navigation_by_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/but_arouter_normal_navigation_fail"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_fail"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="调用失败"
+            app:layout_constraintTop_toTopOf="@id/but_arouter_normal_navigation_call_single"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/but_arouter_normal_navigation_call_single"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_java"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="跳转Java模块（无参）"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/but_arouter_normal_navigation_call_single"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/but_arouter_normal_navigation_with_params_java"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_with_params_java"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="跳转Java模块（传参）"
+            app:layout_constraintTop_toTopOf="@id/but_arouter_normal_navigation_java"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/but_arouter_normal_navigation_java"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_kotlin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="跳转Kotlin模块（无参）"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/but_arouter_normal_navigation_java"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/but_arouter_normal_navigation_with_params_kotlin"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <Button
+            android:id="@+id/but_arouter_normal_navigation_with_params_kotlin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="跳转Kotlin模块（传参）"
+            app:layout_constraintTop_toTopOf="@id/but_arouter_normal_navigation_kotlin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/but_arouter_normal_navigation_kotlin"
+            app:layout_constraintHorizontal_chainStyle="spread"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
