@@ -1,3 +1,5 @@
+//引入common_config配置
+apply from: "${rootProject.rootDir}/common_config.gradle"
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -46,6 +48,8 @@ dependencies {
     implementation 'com.alibaba:arouter-api:1.5.0'
     kapt 'com.alibaba:arouter-compiler:1.2.2'
     implementation project(path: ':base')
-    implementation project(path: ':module_java')
+    if (!project.ext.isModuleDebug) {
+        implementation project(path: ':module_java')
+    }
     implementation project(path: ':module_kotlin')
 }

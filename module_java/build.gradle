@@ -1,4 +1,12 @@
-apply plugin: 'com.android.library'
+//apply plugin: 'com.android.library'
+//引入common_config配置
+apply from: "${rootProject.rootDir}/common_config.gradle"
+
+if (project.ext.isModuleDebug) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 apply plugin: 'com.alibaba.arouter'
 android {
     compileSdkVersion 28
@@ -6,6 +14,10 @@ android {
     resourcePrefix "java_"
 
     defaultConfig {
+        if (project.ext.isModuleDebug) {
+            // 单独调试时需要添加 applicationId
+            applicationId "com.example.module_java"
+        }
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
@@ -18,7 +30,17 @@ android {
             }
         }
     }
-
+    sourceSets {
+        main {
+            //在需要单独调试的module的src/main目录下新建manifest目录和AndroidManifest文件
+            // 单独调试与集成调试时使用不同的 AndroidManifest.xml 文件
+            if (project.ext.isModuleDebug) {
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false

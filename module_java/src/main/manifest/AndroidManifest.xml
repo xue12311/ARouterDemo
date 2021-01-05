@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.module_java">
+
+    <application
+        android:name=".ModuleJavaApplication"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/java_app_name"
+        android:theme="@style/JavaAppTheme">
+        <activity android:name=".activity.ARouterTestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
