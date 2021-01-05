@@ -2,7 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.alibaba.arouter'
 android {
     compileSdkVersion 28
-
+    //资源前缀 只能限定Xml资源 提示并阻断编译和运行
+    resourcePrefix "java_"
 
     defaultConfig {
         minSdkVersion 15

@@ -21,6 +21,7 @@ import com.example.arouterdemo.bean.UserBean
 import com.example.arouterdemo.utils.HelloService
 import com.example.arouterdemo.utils.SingleService
 import com.example.base.ARouterConstants
+import com.example.base.BaseApplication
 import kotlinx.android.synthetic.main.activity_main.*
 
 @Route(path = ARouterConstants.MainActivity)
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         if (v != null) {
             when (v.id) {
-                R.id.but_init_arouter -> MyApplication.initARouter()//初始化ARouter
+                R.id.but_init_arouter -> BaseApplication.instance().initARouter()//初始化ARouter
                 R.id.but_destroy_arouter -> ARouter.getInstance().destroy()//关闭ARouter
                 R.id.but_arouter_normal_navigation -> ARouter.getInstance().build(ARouterConstants.ARouterTestActivity).navigation()
                 R.id.but_arouter_normal_navigation_with_params -> {

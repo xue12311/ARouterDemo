@@ -1,10 +1,7 @@
 package com.example.arouterdemo.utils
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
-import android.os.Looper
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
@@ -12,8 +9,6 @@ import com.alibaba.android.arouter.facade.template.IInterceptor
 import com.blankj.utilcode.util.LogUtils
 import com.example.arouterdemo.activity.MainActivity
 import com.example.base.ARouterConstants
-import kotlinx.coroutines.*
-import java.lang.Runnable
 
 /**
  *

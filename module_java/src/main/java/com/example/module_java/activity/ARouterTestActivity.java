@@ -25,7 +25,7 @@ public class ARouterTestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_arouter_test);
+        setContentView(R.layout.java_activity_arouter_test);
         ARouter.getInstance().inject(this);
         tvARouterDemo = findViewById(R.id.tv_arouter_demo);
         if (!StringUtils.isEmpty(name)) {

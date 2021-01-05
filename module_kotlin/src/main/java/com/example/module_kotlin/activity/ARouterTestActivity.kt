@@ -7,8 +7,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.StringUtils
 import com.example.base.ARouterConstants
-import com.example.module_kotlin.R.layout.activity_arouter_test
-import kotlinx.android.synthetic.main.activity_arouter_test.*
+import com.example.module_kotlin.R.layout.kotlin_activity_arouter_test
+import kotlinx.android.synthetic.main.kotlin_activity_arouter_test.*
 
 /**
  *
@@ -32,7 +32,7 @@ class ARouterTestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(activity_arouter_test)
+        setContentView(kotlin_activity_arouter_test)
         ARouter.getInstance().inject(this)
         if(!StringUtils.isEmpty(name)){
         var str_user = " 用户1\n 姓名：${name}\n 年龄：${age}\n 性别：${if (sex) '男' else '女'}"

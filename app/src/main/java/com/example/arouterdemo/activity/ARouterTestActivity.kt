@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.blankj.utilcode.util.LogUtils
-import com.example.arouterdemo.R.layout.activity_arouter_test
+import com.example.arouterdemo.R.layout.kotlin_activity_arouter_test
 import com.example.arouterdemo.bean.UserBean
 import com.example.base.ARouterConstants
 import kotlinx.android.synthetic.main.activity_arouter_test.*
@@ -48,7 +47,7 @@ class ARouterTestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(activity_arouter_test)
+        setContentView(kotlin_activity_arouter_test)
         ARouter.getInstance().inject(this)
         if (intent != null && (intent.getStringExtra("name") != null)) {
             var name = intent.getStringExtra("name")
