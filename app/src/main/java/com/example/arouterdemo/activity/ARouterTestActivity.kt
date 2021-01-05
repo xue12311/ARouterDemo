@@ -1,14 +1,15 @@
 package com.example.arouterdemo.activity
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.example.arouterdemo.R
 import com.example.arouterdemo.R.layout.kotlin_activity_arouter_test
 import com.example.arouterdemo.bean.UserBean
 import com.example.base.ARouterConstants
-import kotlinx.android.synthetic.main.activity_arouter_test.*
 
 /**
  *
@@ -48,6 +49,7 @@ class ARouterTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(kotlin_activity_arouter_test)
+        val tv_arouter_demo = findViewById<TextView>(R.id.tv_arouter_demo)
         ARouter.getInstance().inject(this)
         if (intent != null && (intent.getStringExtra("name") != null)) {
             var name = intent.getStringExtra("name")
@@ -59,7 +61,8 @@ class ARouterTestActivity : AppCompatActivity() {
             var user = (intent.getBundleExtra("Bean"))?.getParcelable<UserBean>("UserBean")
             var str_user1 = " 用户1\n 姓名：${name}\n 年龄：${age}\n 性别：${if (sex) '男' else '女'}"
             if (user != null) {
-                var str_user2 = " 用户2\n 姓名：${user.name}\n 年龄：${user.age}\n 性别：${if (user.sex) '男' else '女'}"
+                var str_user2 =
+                    " 用户2\n 姓名：${user.name}\n 年龄：${user.age}\n 性别：${if (user.sex) '男' else '女'}"
                 str_user1 = str_user1 + "\n\n" + str_user2
             }
             tv_arouter_demo.text = str_user1

@@ -1,15 +1,7 @@
-//apply plugin: 'com.android.library'
-//引入common_config配置
 apply from: "${rootProject.rootDir}/common_config.gradle"
+project.ext.setAppOrLibDefaultConfigJava project
 
-if (project.ext.isModuleDebug) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
-apply plugin: 'com.alibaba.arouter'
 android {
-    compileSdkVersion 28
     //资源前缀 只能限定Xml资源 提示并阻断编译和运行
     resourcePrefix "java_"
 
@@ -18,38 +10,18 @@ android {
             // 单独调试时需要添加 applicationId
             applicationId "com.example.module_java"
         }
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        multiDexEnabled true
-//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME : project.getName() ]
-            }
-        }
-    }
-    sourceSets {
-        main {
-            //在需要单独调试的module的src/main目录下新建manifest目录和AndroidManifest文件
-            // 单独调试与集成调试时使用不同的 AndroidManifest.xml 文件
-            if (project.ext.isModuleDebug) {
-                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            }
-        }
+//        //ARouter 编译生成路由
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//            }
+//        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
     }
 }
 
@@ -60,6 +32,4 @@ dependencies {
 //    androidTestImplementation 'androidx.test:runner:1.2.0'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':base')
-    implementation 'com.alibaba:arouter-api:1.5.0'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }

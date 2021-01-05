@@ -13,7 +13,6 @@ import com.blankj.utilcode.util.LogUtils
 import com.example.arouterdemo.R
 import com.example.arouterdemo.bean.UserBean
 import com.example.base.ARouterConstants
-import kotlinx.android.synthetic.main.activity_arouter_test.*
 
 /**
  *
@@ -59,7 +58,7 @@ class ARouterTestFragment : Fragment() {
                 var str_user2 = " 用户2\n 姓名：${user.name}\n 年龄：${user.age}\n 性别：${if (user.sex) '男' else '女'}"
                 str_user1 = str_user1 + "\n\n" + str_user2
             }
-            tv_arouter_demo.text = str_user1
+            tvArouterDemo.text = str_user1
             var s_user = activity?.intent!!.getSerializableExtra("s_bean") as UserBean
             var p_user = activity?.intent!!.getParcelableExtra<UserBean>("p_bean")
             LogUtils.d("ARouter", str_user1)

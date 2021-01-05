@@ -1,5 +1,284 @@
 project.ext {
     //是否允许module单独调试
-    isModuleDebug = true
+    isModuleDebug = false
+    compileSdkVersion = 28
+    buildToolsVersion = "28.0.1"
+    applicationId = "com.example.arouterdemo"
+    minSdkVersion = 15
+    targetSdkVersion = 28
+    versionCode = 1
+    versionName = "1.0.1"
+    multiDexEnabled = true
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+    //设置app配置 --- java
+    setAppDefaultConfigJava = {
+        ext ->
+            ext.apply plugin: 'com.android.application'
+            ext.apply plugin: 'com.alibaba.arouter'
+            ext.description "app"
+            //设置通用Android配置
+            setAppAndroidConfigJava ext.android
+            //设置通用依赖配置
+            setDependenciesJava ext.dependencies
+    }
+
+    //设置app配置 --- kotlin
+    setAppDefaultConfigKotlin = {
+        ext ->
+            ext.apply plugin: 'com.android.application'
+            ext.apply plugin: 'com.alibaba.arouter'
+            ext.apply plugin: 'kotlin-android'
+            ext.apply plugin: 'kotlin-parcelize'
+            ext.apply plugin: 'kotlin-kapt'
+            ext.description "app"
+            //设置通用Android配置
+            setAppAndroidConfigKotlin ext.android
+            //设置通用依赖配置
+            setDependenciesKotlin ext.dependencies
+            //设置kapt
+            setKaptKotlin ext.kapt
+    }
+
+    //设置lib配置 --- java （只可以作为lib,不可单独调试）
+    setLibDefaultConfigJava = {
+        ext ->
+            ext.apply plugin: 'com.android.library'
+            ext.apply plugin: 'com.alibaba.arouter'
+            ext.description "lib"
+            //设置通用Android配置
+            setLibAndroidConfigJava ext.android
+            //设置通用依赖配置
+            setDependenciesJava ext.dependencies
+    }
+
+    //设置lib配置 --- kotlin （只可以作为lib,不可单独调试）
+    setLibDefaultConfigKotlin = {
+        ext ->
+            ext.apply plugin: 'com.android.library'
+            ext.apply plugin: 'com.alibaba.arouter'
+            ext.apply plugin: 'kotlin-android'
+            ext.apply plugin: 'kotlin-parcelize'
+            ext.apply plugin: 'kotlin-kapt'
+            ext.description "lib"
+            //设置通用Android配置
+            setLibAndroidConfigKotlin ext.android
+            //设置通用依赖配置
+            setDependenciesKotlin ext.dependencies
+            //设置kapt
+            setKaptKotlin ext.kapt
+    }
+
+    //设置lib配置 --- java（可作为project单独调试）
+    setAppOrLibDefaultConfigJava = {
+        ext ->
+            if (project.ext.isModuleDebug) {
+                ext.apply plugin: 'com.android.application'
+                ext.description "app"
+            } else {
+                ext.apply plugin: 'com.android.library'
+                ext.description "lib"
+            }
+            ext.apply plugin: 'com.alibaba.arouter'
+            //设置通用Android配置
+            setAppOrLibAndroidConfigJava ext.android
+            //设置通用依赖配置
+            setDependenciesJava ext.dependencies
+    }
+
+    //设置lib配置 --- kotlin（可作为project单独调试）
+    setAppOrLibDefaultConfigKotlin = {
+        ext ->
+            if (project.ext.isModuleDebug) {
+                ext.apply plugin: 'com.android.application'
+                ext.description "app"
+            } else {
+                ext.apply plugin: 'com.android.library'
+                ext.description "lib"
+            }
+            ext.apply plugin: 'com.alibaba.arouter'
+            ext.apply plugin: 'kotlin-android'
+            ext.apply plugin: 'kotlin-parcelize'
+            ext.apply plugin: 'kotlin-kapt'
+            //设置通用Android配置
+            setAppOrLibAndroidConfigKotlin ext.android
+            //设置通用依赖配置
+            setDependenciesKotlin ext.dependencies
+            //设置kapt
+            setKaptKotlin ext.kapt
+    }
+
+
+    //设置app android配置 --- java
+    setAppAndroidConfigJava = {
+        ext -> //extension 相当于 android 对象
+            ext.compileSdkVersion project.ext.compileSdkVersion
+            ext.buildToolsVersion project.ext.buildToolsVersion
+            ext.defaultConfig {
+                applicationId project.ext.applicationId
+                minSdkVersion project.ext.minSdkVersion
+                targetSdkVersion project.ext.targetSdkVersion
+                versionCode project.ext.versionCode
+                versionName project.ext.versionName
+                multiDexEnabled project.ext.multiDexEnabled
+                testInstrumentationRunner project.ext.testInstrumentationRunner
+                //ARouter 编译生成路由
+                javaCompileOptions {
+                    annotationProcessorOptions {
+                        arguments = [AROUTER_MODULE_NAME: ext.project.getName()]
+                    }
+                }
+            }
+            ext.compileOptions {
+                sourceCompatibility JavaVersion.VERSION_1_8
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
+    }
+    //设置app android配置  --- kotlin
+    setAppAndroidConfigKotlin = {
+        ext -> //extension 相当于 android 对象
+            ext.compileSdkVersion project.ext.compileSdkVersion
+            ext.buildToolsVersion project.ext.buildToolsVersion
+            ext.defaultConfig {
+                applicationId project.ext.applicationId
+                minSdkVersion project.ext.minSdkVersion
+                targetSdkVersion project.ext.targetSdkVersion
+                versionCode project.ext.versionCode
+                versionName project.ext.versionName
+                multiDexEnabled project.ext.multiDexEnabled
+                testInstrumentationRunner project.ext.testInstrumentationRunner
+            }
+            ext.compileOptions {
+                sourceCompatibility JavaVersion.VERSION_1_8
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
+    }
+
+    //设置lib android配置（只可以作为lib,不可单独调试） --- java
+    setLibAndroidConfigJava = {
+        ext -> //extension 相当于 android 对象
+            ext.compileSdkVersion project.ext.compileSdkVersion.toInteger()
+            ext.buildToolsVersion project.ext.buildToolsVersion
+            ext.defaultConfig {
+                minSdkVersion project.ext.minSdkVersion
+                targetSdkVersion project.ext.targetSdkVersion
+                versionCode project.ext.versionCode
+                versionName project.ext.versionName
+                multiDexEnabled project.ext.multiDexEnabled
+                testInstrumentationRunner project.ext.testInstrumentationRunner
+                //ARouter 编译生成路由
+                javaCompileOptions {
+                    annotationProcessorOptions {
+                        arguments = [AROUTER_MODULE_NAME: ext.project.getName()]
+                    }
+                }
+            }
+    }
+    //设置lib android配置（只可以作为lib,不可单独调试） --- kotlin
+    setLibAndroidConfigKotlin = {
+        ext -> //extension 相当于 android 对象
+            ext.compileSdkVersion project.ext.compileSdkVersion
+            ext.buildToolsVersion project.ext.buildToolsVersion
+            ext.defaultConfig {
+                minSdkVersion project.ext.minSdkVersion
+                targetSdkVersion project.ext.targetSdkVersion
+                versionCode project.ext.versionCode
+                versionName project.ext.versionName
+                multiDexEnabled project.ext.multiDexEnabled
+                testInstrumentationRunner project.ext.testInstrumentationRunner
+            }
+    }
+    //设置lib android配置（可作为project单独调试） --- java
+    setAppOrLibAndroidConfigJava = {
+        ext -> //extension 相当于 android 对象
+            ext.compileSdkVersion project.ext.compileSdkVersion
+            ext.buildToolsVersion project.ext.buildToolsVersion
+            ext.defaultConfig {
+                minSdkVersion project.ext.minSdkVersion
+                targetSdkVersion project.ext.targetSdkVersion
+                versionCode project.ext.versionCode
+                versionName project.ext.versionName
+                multiDexEnabled project.ext.multiDexEnabled
+                testInstrumentationRunner project.ext.testInstrumentationRunner
+                //ARouter 编译生成路由
+                javaCompileOptions {
+                    annotationProcessorOptions {
+                        arguments = [AROUTER_MODULE_NAME: project.getName()]
+                    }
+                }
+            }
+            if (project.ext.isModuleDebug) {
+                ext.compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_1_8
+                    targetCompatibility JavaVersion.VERSION_1_8
+                }
+            }
+
+            ext.sourceSets {
+                main {
+                    //在需要单独调试的module的src/main目录下新建manifest目录和AndroidManifest文件
+                    // 单独调试与集成调试时使用不同的 AndroidManifest.xml 文件
+                    if (project.ext.isModuleDebug) {
+                        manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+                    } else {
+                        manifest.srcFile 'src/main/AndroidManifest.xml'
+                    }
+                }
+            }
+    }
+//设置lib android配置（可作为project单独调试） --- kotlin
+    setAppOrLibAndroidConfigKotlin = {
+        ext -> //extension 相当于 android 对象
+            ext.compileSdkVersion project.ext.compileSdkVersion
+            ext.buildToolsVersion project.ext.buildToolsVersion
+            ext.defaultConfig {
+                minSdkVersion project.ext.minSdkVersion
+                targetSdkVersion project.ext.targetSdkVersion
+                versionCode project.ext.versionCode
+                versionName project.ext.versionName
+                multiDexEnabled project.ext.multiDexEnabled
+                testInstrumentationRunner project.ext.testInstrumentationRunner
+            }
+
+            if (project.ext.isModuleDebug) {
+                ext.compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_1_8
+                    targetCompatibility JavaVersion.VERSION_1_8
+                }
+            }
+
+            ext.sourceSets {
+                main {
+                    //在需要单独调试的module的src/main目录下新建manifest目录和AndroidManifest文件
+                    // 单独调试与集成调试时使用不同的 AndroidManifest.xml 文件
+                    if (project.ext.isModuleDebug) {
+                        manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+                    } else {
+                        manifest.srcFile 'src/main/AndroidManifest.xml'
+                    }
+                }
+            }
+    }
+
+//设置依赖  --- java
+    setDependenciesJava = {
+        ext ->
+            ext.implementation 'com.alibaba:arouter-api:1.5.1'
+            ext.annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
+    }
+
+//设置依赖  --- kotlin
+    setDependenciesKotlin = {
+        ext ->
+            ext.implementation 'com.alibaba:arouter-api:1.5.1'
+            ext.kapt 'com.alibaba:arouter-compiler:1.5.1'
+    }
+
+//设置kapt  --- kotlin
+    setKaptKotlin = {
+        ext ->
+            ext.arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+    }
 }

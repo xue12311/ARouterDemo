@@ -22,7 +22,6 @@ import com.example.arouterdemo.utils.HelloService
 import com.example.arouterdemo.utils.SingleService
 import com.example.base.ARouterConstants
 import com.example.base.BaseApplication
-import kotlinx.android.synthetic.main.activity_main.*
 
 @Route(path = ARouterConstants.MainActivity)
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -37,24 +36,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         activity = this
         setContentView(activity_main)
-        but_init_arouter.setOnClickListener(this)
-        but_destroy_arouter.setOnClickListener(this)
-        but_arouter_normal_navigation.setOnClickListener(this)
-        but_arouter_normal_navigation_with_params.setOnClickListener(this)
-        but_arouter_normal_navigation_java.setOnClickListener(this)
-        but_arouter_normal_navigation_with_params_java.setOnClickListener(this)
-        but_arouter_normal_navigation_kotlin.setOnClickListener(this)
-        but_arouter_normal_navigation_with_params_kotlin.setOnClickListener(this)
-        but_arouter_normal_navigation_with_params_url.setOnClickListener(this)
-        but_arouter_normal_navigation_with_params_fragment.setOnClickListener(this)
-        but_arouter_normal_navigation_oldVersionAnim.setOnClickListener(this)
-        but_arouter_normal_navigation_newVersionAnim.setOnClickListener(this)
-        but_arouter_normal_navigation_interceptor.setOnClickListener(this)
-        but_arouter_normal_navigation_autoInject.setOnClickListener(this)
-        but_arouter_normal_navigation_by_type.setOnClickListener(this)
-        but_arouter_normal_navigation_by_name.setOnClickListener(this)
-        but_arouter_normal_navigation_call_single.setOnClickListener(this)
-        but_arouter_normal_navigation_fail.setOnClickListener(this)
     }
 
     var navCallback = object : NavCallback() {
@@ -83,7 +64,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             when (v.id) {
                 R.id.but_init_arouter -> BaseApplication.instance().initARouter()//初始化ARouter
                 R.id.but_destroy_arouter -> ARouter.getInstance().destroy()//关闭ARouter
-                R.id.but_arouter_normal_navigation -> ARouter.getInstance().build(ARouterConstants.ARouterTestActivity).navigation()
+                R.id.but_arouter_normal_navigation -> ARouter.getInstance()
+                    .build(ARouterConstants.ARouterTestActivity).navigation()
                 R.id.but_arouter_normal_navigation_with_params -> {
                     var user1: UserBean = UserBean("001", "李四", 12, false)
                     var user2: UserBean = UserBean("王五", 23)
@@ -113,23 +95,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 R.id.but_arouter_normal_navigation_with_params_fragment -> {
                     var fragment: Fragment =
-                        ARouter.getInstance().build(ARouterConstants.ARouterTestFragment).navigation() as Fragment
+                        ARouter.getInstance().build(ARouterConstants.ARouterTestFragment)
+                            .navigation() as Fragment
                     ToastUtils.showShort("找到Fragment：${fragment.toString()}")
                 }
                 R.id.but_arouter_normal_navigation_oldVersionAnim -> {
                     ARouter.getInstance().build(ARouterConstants.ARouterTestActivity)
-                        .withTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom).navigation()
+                        .withTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom)
+                        .navigation()
                 }
                 R.id.but_arouter_normal_navigation_newVersionAnim -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                         var compat: ActivityOptionsCompat =
-                            ActivityOptionsCompat.makeScaleUpAnimation(v, v.width / 2, v.height / 2, 0, 0)
+                            ActivityOptionsCompat.makeScaleUpAnimation(
+                                v,
+                                v.width / 2,
+                                v.height / 2,
+                                0,
+                                0
+                            )
                         ARouter.getInstance().build(ARouterConstants.ARouterTestActivity)
                             .withOptionsCompat(compat).navigation()
                     } else {
                         ToastUtils.showShort("API < 16,不支持新版本动画")
                         ARouter.getInstance().build(ARouterConstants.ARouterTestActivity)
-                            .withTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom).navigation()
+                            .withTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom)
+                            .navigation()
                     }
                 }
                 R.id.but_arouter_normal_navigation_interceptor -> {
@@ -141,7 +132,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .navigation(this, 1291)
                 }
                 R.id.but_arouter_normal_navigation_by_name -> {
-                    (ARouter.getInstance().build(ARouterConstants.ARouterTestHelloServiceImpl).navigation() as HelloService).sayHello(
+                    (ARouter.getInstance().build(ARouterConstants.ARouterTestHelloServiceImpl)
+                        .navigation() as HelloService).sayHello(
                         "调用服务name"
                     )
                 }
@@ -155,7 +147,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     ARouter.getInstance().build("/xxx/xxx").navigation(this, navCallback)
                 }
                 R.id.but_arouter_normal_navigation_java -> {
-                    ARouter.getInstance().build(ARouterConstants.ARouterTestActivityJava).navigation(this, navCallback)
+                    ARouter.getInstance().build(ARouterConstants.ARouterTestActivityJava)
+                        .navigation(this, navCallback)
                 }
                 R.id.but_arouter_normal_navigation_with_params_java -> {
                     ARouter.getInstance().build(ARouterConstants.ARouterTestActivityJava)
@@ -165,7 +158,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .navigation(this, navCallback)
                 }
                 R.id.but_arouter_normal_navigation_kotlin -> {
-                    ARouter.getInstance().build(ARouterConstants.ARouterTestActivityKotlin).navigation()
+                    ARouter.getInstance().build(ARouterConstants.ARouterTestActivityKotlin)
+                        .navigation()
                 }
                 R.id.but_arouter_normal_navigation_with_params_kotlin -> {
                     ARouter.getInstance().build(ARouterConstants.ARouterTestActivityKotlin)
